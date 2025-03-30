@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meine erste Webseite</title>
+<link rel="stylesheet" href="Grid_noch_spezieller.css">
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1>Meine erste Webseite</h1>
+		</header>
+
+		<!-- Suchleiste unter dem Header -->
+		<div class="search-bar">
+			<input type="text" placeholder="Suche nach Personen, Themen, etc.">
+			<button type="submit">🔍</button>
+		</div>
+
+		<!-- Navigation als Vollbreite-Tabs -->
+		<nav>
+			<ul class="tab-list">
+				<li class="tab-item active" aria-selected="true"
+					onclick="showTab('pers-angaben')">Pers. Angaben</li>
+				<li class="tab-item" aria-selected="false"
+					onclick="showTab('hobbies')">Hobbies</li>
+				<li class="tab-item" aria-selected="false"
+					onclick="showTab('interessen')">Interessen</li>
+			</ul>
+		</nav>
+
+		<aside class="sidebar">
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 1">Steuernummer1</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 2">Steuernummer2</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 3">Steuernummer3</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 4">Steuernummer4</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 5">Steuernummer5</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 6">Steuernummer6</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 7">Steuernummer7</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 8">Steuernummer8</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 9">Steuernummer9</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 10">Steuernummer10</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 11">Steuernummer11</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 12">Steuernummer12</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 13">Steuernummer13</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 14">Steuernummer14</div>
+			<div class="sidebar-steuernummern"
+				data-tooltip="Informationen zur Steuernummer 15">Steuernummer15</div>
+
+		</aside>
+
+		<main>
+			<section id="pers-angaben" class="content active">
+				<h2>Formularelemente</h2>
+				<form id="personalForm" onsubmit="savePersonalData(event)">
+					<!-- aria-hidden="true" bedeutet dass das Label vom Screenreader ignoriert wird -->
+					<!-- aria-required="true" bedeutet dass es eine Pflichteingabe ist; wird durch den Screenreader gesagt -->
+					<!-- aria-describedby="vornameHint" Dieses Attribut verknüpft das Eingabefeld mit dem Element <small id="vornameHint">.
+					der Screenreader liest die zusätzliche Beschreibung laut vor, wenn sich der Fokus auf diesem Eingabefeld befindet.  -->
+					<div>
+						<input type="text" id="vorname" name="vorname"
+							aria-required="true" aria-describedby="vornameHint"
+							placeholder="Vorname"> <small id="vornameHint"
+							class="visually-hidden">Bitte geben Sie Ihren Vornamen
+							ein</small> <input type="text" id="nachname" name="nachname"
+							aria-required="true" aria-describedby="nachnameHint"
+							placeholder="Nachname"> <small id="nachnameHint"
+							class="visually-hidden">Bitte geben Sie Ihren Nachnamen
+							ein</small>
+					</div>
+					<div>
+						<input class="wohnort" type="text" id="wohnort" name="wohnort"
+							aria-required="true" aria-describedby="wohnortHint"
+							placeholder="Wohnort"> <small id="wohnortHint"
+							class="visually-hidden">Bitte geben Sie Ihren Wohnort ein</small>
+						<input class="plz" type="text" id="postleitzahl"
+							name="postleitzahl" aria-required="true"
+							aria-describedby="postleitzahlHint" placeholder="Postleitzahl">
+						<small id="postleitzahlHint" class="visually-hidden">Bitte
+							geben Sie Ihre Postleitzahl ein</small>
+					</div>
+					<div>
+						<input class="strasse" type="text" id="strasse" name="strasse"
+							aria-required="true" aria-describedby="strasseHint"
+							placeholder="Straße"> <small id="strasseHint"
+							class="visually-hidden">Bitte geben Sie Ihre Straße ein</small> <input
+							class="nummer" type="text" id="nummer" name="nummer"
+							aria-required="true" aria-describedby="nummerHint"
+							placeholder="Hausnummer"> <small id="nummerHint"
+							class="visually-hidden">Bitte geben Sie Ihre Hausnummer
+							ein</small>
+					</div>
+					<input type="email" id="email" name="email" aria-required="true"
+						aria-describedby="emailHint" placeholder="E-Mail"> <small
+						id="emailHint" class="visually-hidden">Bitte geben Sie
+						Ihre E-Mailadresse ein</small>
+					<textarea id="nachricht" name="nachricht" rows="4"
+						aria-required="true" aria-describedby="nachrichtHint"
+						placeholder="Was gibt es über mich zu wissen"></textarea>
+					<small id="nachrichtHint" class="visually-hidden">Bitte
+						geben Sie hier alles was es über sie zu wissen gibt ein</small> <label
+						for="auswahl">Kategorie:</label> <select id="auswahl"
+						name="auswahl">
+						<option value="option1">Option 1</option>
+						<option value="option2">Option 2</option>
+						<option value="option3">Option 3</option>
+					</select>
+					<div class="button-group">
+						<button type="submit">Speichern</button>
+						<button type="reset">Zurücksetzen</button>
+					</div>
+				</form>
+			</section>
+			<section id="hobbies" class="content">
+				<table>
+					<caption>Beispieldaten</caption>
+					<thead>
+						<tr>
+							<th scope="col" onclick="sortTable(0)" aria-sort="none"
+								tabindex="0">Name</th>
+							<th scope="col" onclick="sortTable(0)" aria-sort="none"
+								tabindex="0">E-Mail</th>
+							<th scope="col" onclick="sortTable(0)" aria-sort="none"
+								tabindex="0">Kategorie</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Max Mustermann</td>
+							<td>max@example.com</td>
+							<td>Option 1</td>
+						</tr>
+						<tr>
+							<td>Lisa Meier</td>
+							<td>lisa@example.com</td>
+							<td>Option 2</td>
+						</tr>
+						<tr>
+							<td>Ernst Müller</td>
+							<td>muelleimer@example.com</td>
+							<td>Option 3</td>
+						</tr>
+						<tr>
+							<td>Mila Ajohara</td>
+							<td>milaa@example.com</td>
+							<td>Option 4</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section id="interessen" class="content">
+				<h2>Interessen</h2>
+				<p>Hier stehen Interessen.</p>
+			</section>
+		</main>
+
+		<footer>Hier ist meine Statusleiste</footer>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>

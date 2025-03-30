@@ -1,0 +1,389 @@
+/* Globale Variablen für Farben & Abstände */
+:root {
+	--primary-color: #34495e;
+	--secondary-color: #2c3e50;
+	--text-color: #ffffff;
+	--base-size: 16px;
+	--gap-size: 0.625rem; /* 10px */
+	--border-radius: 0.5rem; /* 8px */
+	--nav-height: auto;
+	--main-height: auto;
+}
+
+/* Standard-Stile */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #ecf0f1;
+	color: var(--secondary-color);
+	font-size: 1rem; /* 16px */
+}
+
+/* Grid Container */
+.container {
+	display: grid;
+	grid-template-areas: "header header" "search search" "sidebar nav"
+		"sidebar main" "footer footer";
+	grid-template-columns: 1fr 4fr;
+	gap: var(--gap-size); /* Abstand zwischen den Grid Containern */
+	max-width: 1200px;
+	margin: 1.25rem auto;
+	/* 20 Pixel oben und unten, links und rechts automatisch entsprechend der Größe des Containers */
+}
+
+/* Styling der Grid-Elemente */
+header, nav, aside, main, footer {
+	padding: 1.25rem; /* 20px */
+	border-radius: var(--border-radius);
+	text-align: center;
+}
+
+/* Einzelne Bereiche stylen */
+header {
+	grid-area: header;
+	background-color: var(--primary-color);
+	font-size: 1.5rem;
+	color: var(--text-color);
+}
+
+/* Suchleiste unter dem Header */
+.search-bar {
+	grid-area: search;
+	display: flex;
+	justify-content: center; /* Zentriert die Suchleiste */
+	align-items: center;
+	padding: 0.5rem; /* 8px */ font-size : 1rem;
+	background-color: #ffffff;
+	border-radius: var(--border-radius);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	font-size: 1rem;
+}
+
+/* Suchfeld */
+.search-bar input {
+	width: 60%;
+	padding: 8px;
+	border: 2px solid #ccc;
+	border-radius: var(--border-radius);
+	font-size: 16px;
+}
+
+/* Suchbutton */
+.search-bar button {
+	padding: 8px 12px;
+	background-color: var(--primary-color);
+	color: white;
+	border: none;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	font-size: 16px;
+	margin-left: 5px;
+	margin-bottom: 10px; /* Abstand nach unten */
+}
+
+.search-bar button:hover {
+	background-color: #2c3e50;
+}
+
+/* Navigation als Vollbreiten-Tabs */
+nav {
+	grid-area: nav;
+	background-color: #2980b9;
+	padding: 0;
+}
+
+.tab-list {
+	display: flex;
+	justify-content: space-evenly; /* Gleichmäßige Verteilung */
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	background-color: #ecf0f1;
+}
+
+.tab-item {
+	flex: 1; /* Jedes Tab nimmt gleich viel Platz ein */
+	text-align: center;
+	padding: 15px;
+	background: var(--primary-color);
+	color: white;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background 0.3s;
+	border-radius: var(--border-radius);
+}
+
+.tab-item[aria-selected="true"] {
+	background: #ffffff;
+	color: var(--primary-color);
+	font-weight: bold;
+}
+
+.tab-item.inactive:hover {
+	background: #1a252f;
+}
+
+.tab-item.active {
+	background: #ffffff;
+	color: #2c3e50;
+	font-weight: bold;
+}
+
+/* Tab wird wieder inaktiv (wenn es zuvor aktiv war) */
+.tab-item.inactive {
+    background:  var(--primary-color); /* Neue Farbe für inaktive Tabs */
+    color: #ffffff;
+}
+
+.tab-item.active:hover {
+	background: gray;
+}
+
+/* Sidebar */
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	grid-area: sidebar;
+	background-color: #34495e;
+	color: var(--text-color);
+	align-items: stretch; /* Volle Breite nutzen */
+	overflow-y: auto; /* Scrollbalken, falls nötig */
+	max-height: 555px; 
+	padding: 10px; /* Innenabstand der Sidebar */
+	gap: 10px; /* Abstand zwischen den Elementen */
+
+}
+
+.sidebar-steuernummern {
+	display: flex;
+	justify-content: center; /* Horizontale Zentrierung des Textes */
+	align-items: center; /* Vertikale Zentrierung des Textes*/
+	cursor: pointer; /* Mauszeiger ändert sich auf Zeigefinger */
+	background: rgba(255, 255, 255, 0.2); /* Leichte Hintergrundfarbe */
+	border-radius: var(--border-radius);
+	flex-grow: 1; /* Nimmt gleichmäßig den Platz ein */
+	transition: transform 0.3s ease-in-out 0.2s, background 0.3s ease-in-out
+		0.2s; /* Elemente nehmen gleichmäßig den zur Verfügung stehenden Platz ein */
+	padding: 10px 10px; /* Erhöht den vertikalen Abstand, lässt Breite unberührt */
+}
+
+.sidebar-steuernummern:hover {
+	background-color: rgb(235, 235, 235);
+	color: #34495e;
+	transform: scale(0.95) translateY(3px);
+	/* Leicht verkleinern und absinken */
+}
+
+.sidebar-steuernummern::after {
+	content: attr(data-tooltip);
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #000;
+	color: #fff;
+	padding: 5px;
+	border-radius: 4px;
+	font-size: 0.75rem;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s;
+}
+
+.sidebar-steuernummern:hover::after {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Inhalt der Tabs */
+.content {
+	display: none; /* Standardmäßig ausgeblendet */
+	padding: 20px; /* Padding innerhalb des Contents */
+	border-radius: var(--border-radius);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	background: white;
+	min-height: 500px;
+}
+
+.content.active {
+	display: flex; /* Flex-Layout aktivieren */
+	flex-direction: column; /* Inhalte in Spalten anordnen */
+	justify-content: flex-start; /* Inhalte nach oben ausrichten */
+}
+
+/* Main Content */
+main {
+	grid-area: main;
+	justify-content: center;
+	align-items: center;
+	padding: 0px; /* damit content direkt in main ist */
+	background-color: rgb(195, 195, 195);
+	border-radius: var(--border-radius);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulare */
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+form div {
+	display: flex;
+	align-items: center;
+	gap: 10px; /* Abstand zwischen Label und Input */
+}
+
+.strasse {
+	flex: 3;
+}
+
+.nummer {
+	flex: 1;
+}
+
+.wohnort {
+	flex: 3;
+}
+
+.plz {
+	flex: 1;
+}
+
+/* Tabelle */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+th {
+    background-color: #004080;
+    color: white;
+    cursor: pointer;
+    position: sticky;
+    top: 0;
+}
+
+th:focus {
+    outline: 2px solid #ffcc00;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #e6f7ff;
+}
+
+/* Markierte Zeile */
+tr.highlight {
+    background-color: #ffcc66;
+    color: #000;
+}
+
+input, textarea, select {
+	flex: 1;
+	padding: 8px;
+	margin-top: 5px;
+	border: 2px solid #004080;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+label {
+	flex: 1;
+	padding: 8px;
+	text-align: left;
+}
+
+::placeholder {
+	color: #888;
+	opacity: 1; /* Volle Deckkraft */
+}
+
+input:focus::placeholder, textarea:focus::placeholder {
+	color: #ccc; /* Weniger auffällig beim Fokus */
+}
+
+/* visually-hidden sorgt dafür, dass der Text für Screenreader zugänglich ist, jedoch für visuelle Benutzer ausgeblendet wird. */
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+	white-space: nowrap;
+}
+
+/* Buttons */
+button {
+	margin-top: 15px;
+	padding: 10px;
+	font-size: 16px;
+	background-color: var(--primary-color);
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.button-group {
+	display: flex;
+	justify-content: flex-start; /* Links ausrichten */
+	gap: 10px; /* Abstand zwischen den Buttons */
+}
+
+button:hover {
+	background-color: #1a252f;
+}
+
+/* Fokus-Stile für Barrierefreiheit */
+button:focus, input:focus, textarea:focus, select:focus {
+	outline: 3px solid #ffcc00;
+}
+
+/* Footer */
+footer {
+	grid-area: footer;
+	background-color: var(--primary-color);
+	font-size: 1.2rem;
+	color: var(--text-color);
+}
+
+/* Responsive Design */
+@media ( max-width : 768px) {
+	.container {
+		grid-template-areas: "header" "search" "sidebar" "nav" "main" "footer";
+		grid-template-columns: 1fr;
+	}
+	main {
+		grid-template-columns: 1fr;
+	}
+	.tab-list {
+		flex-direction: column;
+	}
+	.tab-item {
+		width: 100%;
+	}
+	th, td {
+        white-space: normal;
+        word-break: break-word;
+    }
+}
